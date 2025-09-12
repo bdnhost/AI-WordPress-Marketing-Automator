@@ -1,0 +1,5 @@
+{
+  "name": "AI WordPress Marketing Automator",
+  "description": "An application that connects to a WordPress site, analyzes its content using AI to identify pillar topics, and then automatically generates and publishes new, relevant blog posts using the Gemini API.",
+  "requestFramePermissions": []
+}
