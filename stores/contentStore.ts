@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import type { SchedulingFrequency } from '../types';
+import { SchedulingFrequency } from '../types';
 
 interface ContentState {
   scheduling: SchedulingFrequency;
@@ -19,7 +19,7 @@ interface ContentState {
 
 export const useContentStore = create<ContentState>()(
   immer((set) => ({
-    scheduling: 'on-click',
+    scheduling: SchedulingFrequency.OnClick,
     isGenerating: false,
     generationProgress: 0,
     lastGeneratedCount: 0,

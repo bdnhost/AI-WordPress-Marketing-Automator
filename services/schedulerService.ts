@@ -1,4 +1,4 @@
-import type { CalendarEvent, GeneratedPost, RecurrenceRule } from '../types';
+import type { CalendarEvent, RecurrenceRule } from '../types';
 import { useCalendarStore } from '../stores/calendarStore';
 import { useSitesStore } from '../stores/sitesStore';
 import * as wordpressService from './wordpressService';
@@ -221,7 +221,7 @@ export function calculateNextDate(
   currentDate: Date,
   recurrence: RecurrenceRule
 ): Date | null {
-  const { frequency, interval, endDate, count } = recurrence;
+  const { frequency, interval, endDate } = recurrence;
   const nextDate = new Date(currentDate);
 
   switch (frequency) {

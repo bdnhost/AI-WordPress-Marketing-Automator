@@ -68,10 +68,10 @@ export default defineConfig(({ mode }) => {
     ],
 
     define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.API_KEY': JSON.stringify(env['API_KEY']),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env['API_KEY']),
       'process.env.VITE_ENCRYPTION_KEY': JSON.stringify(
-        env.VITE_ENCRYPTION_KEY || 'default-key-change-in-production'
+        env['VITE_ENCRYPTION_KEY'] || 'default-key-change-in-production'
       ),
     },
 

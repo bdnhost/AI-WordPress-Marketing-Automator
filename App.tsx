@@ -5,7 +5,7 @@ import { PillarTopicsDisplay } from './components/PillarTopicsDisplay';
 import { ControlPanel } from './components/ControlPanel';
 import { GeneratedPostCard } from './components/GeneratedPostCard';
 import { Spinner } from './components/Spinner';
-import { Site, WPCredentials, PillarTopic, GeneratedPost, AppState, SchedulingFrequency } from './types';
+import { Site, WPCredentials, GeneratedPost, AppState, SchedulingFrequency } from './types';
 import * as wordpressService from './services/wordpressService';
 import * as geminiService from './services/geminiService';
 import { LogoIcon, ArrowRightIcon } from './components/icons';

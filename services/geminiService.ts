@@ -59,10 +59,10 @@ export async function identifyPillarTopics(posts: WordPressPost[]): Promise<Pill
     });
 
     try {
-        const jsonText = response.text.trim();
+        const jsonText = (response.text ?? '').trim();
         return JSON.parse(jsonText) as PillarTopic[];
-    } catch (e) {
-        console.error("Failed to parse Gemini response for pillar topics:", response.text);
+    } catch {
+        console.error("Failed to parse Gemini response for pillar topics:", response.text ?? '');
         throw new Error("AI נכשל בהחזרת נושאי ליבה תקינים. נסה שוב.");
     }
 }
@@ -111,10 +111,10 @@ export async function generatePostIdea(pillarTopics: PillarTopic[], existingTitl
     });
     
     try {
-        const jsonText = response.text.trim();
+        const jsonText = (response.text ?? '').trim();
         return JSON.parse(jsonText);
-    } catch (e) {
-        console.error("Failed to parse Gemini response for post generation:", response.text);
+    } catch {
+        console.error("Failed to parse Gemini response for post generation:", response.text ?? '');
         throw new Error("AI נכשל בהחזרת רעיון תקין לפוסט. נסה שוב.");
     }
 }
@@ -136,7 +136,7 @@ export async function generateFullPostContent(postIdea: GeneratedPost): Promise<
             contents: prompt,
         });
 
-        const sectionContent = response.text.trim();
+        const sectionContent = (response.text ?? '').trim();
         fullContent += `<h2>${heading}</h2><p>${sectionContent.replace(/\n/g, '</p><p>')}</p>`;
     }
     
@@ -156,7 +156,11 @@ export async function generateImage(prompt: string): Promise<string> {
     });
 
     if (response.generatedImages && response.generatedImages.length > 0) {
-        return response.generatedImages[0].image.imageBytes;
+        const imageBytes = response.generatedImages[0]?.image?.imageBytes;
+        if (!imageBytes) {
+            throw new Error("Failed to generate image. The response did not contain valid image data.");
+        }
+        return imageBytes;
     } else {
         throw new Error("Failed to generate image. The response did not contain any images.");
     }

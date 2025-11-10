@@ -138,6 +138,7 @@ export function stripHtml(html: string): string {
 export function sanitizeHtml(html: string): string {
   // Dynamically import DOMPurify
   if (typeof window !== 'undefined') {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const DOMPurify = require('dompurify');
     return DOMPurify.sanitize(html);
   }

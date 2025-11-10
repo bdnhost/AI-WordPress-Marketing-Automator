@@ -169,10 +169,10 @@ export async function generatePostWithBrandVoice(
   });
 
   try {
-    const jsonText = response.text.trim();
+    const jsonText = (response.text ?? '').trim();
     return JSON.parse(jsonText);
-  } catch (e) {
-    console.error('Failed to parse Gemini response for post generation:', response.text);
+  } catch {
+    console.error('Failed to parse Gemini response for post generation:', response.text ?? '');
     throw new Error('AI נכשל בהחזרת רעיון תקין לפוסט. נסה שוב.');
   }
 }
@@ -213,7 +213,7 @@ export async function generateFullPostWithBrandVoice(
       contents: prompt,
     });
 
-    const sectionContent = response.text.trim();
+    const sectionContent = (response.text ?? '').trim();
     fullContent += `<h2>${heading}</h2><p>${sectionContent.replace(/\n\n/g, '</p><p>')}</p>`;
   }
 
@@ -233,7 +233,7 @@ export async function generateFullPostWithBrandVoice(
       contents: conclusionPrompt,
     });
 
-    fullContent += `<h2>לסיום</h2><p>${conclusionResponse.text.trim()}</p>`;
+    fullContent += `<h2>לסיום</h2><p>${(conclusionResponse.text ?? '').trim()}</p>`;
   }
 
   return fullContent;

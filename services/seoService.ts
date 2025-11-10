@@ -23,7 +23,7 @@ function analyzeKeywords(content: string, targetKeywords: string[]): KeywordAnal
 
     // Check if keyword is in title
     const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/i);
-    const title = titleMatch ? stripHtml(titleMatch[1]).toLowerCase() : '';
+    const title = titleMatch ? stripHtml(titleMatch[1] ?? '').toLowerCase() : '';
     const inTitle = title.includes(keywordLower);
 
     // Count appearances in headings
@@ -33,7 +33,7 @@ function analyzeKeywords(content: string, targetKeywords: string[]): KeywordAnal
 
     // Check first paragraph
     const firstPMatch = content.match(/<p[^>]*>(.*?)<\/p>/i);
-    const firstParagraph = firstPMatch ? stripHtml(firstPMatch[1]).toLowerCase() : '';
+    const firstParagraph = firstPMatch ? stripHtml(firstPMatch[1] ?? '').toLowerCase() : '';
     const inFirstParagraph = firstParagraph.includes(keywordLower);
 
     const prominence = calculateProminence(density, inTitle, inHeadings, inFirstParagraph);
@@ -206,7 +206,7 @@ function analyzeMetaTags(content: string, title?: string): MetaAnalysis {
   });
 
   // Title analysis (if provided)
-  const titleLength = title ? title.length : h1Match ? stripHtml(h1Match[1]).length : 0;
+  const titleLength = title ? title.length : h1Match ? stripHtml(h1Match[1] ?? '').length : 0;
   const titleOptimal = titleLength >= 50 && titleLength <= 60;
 
   // Description placeholder (would need meta tag extraction in real implementation)
